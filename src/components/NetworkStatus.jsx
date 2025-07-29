@@ -1,8 +1,9 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Wifi, WifiOff, Activity, AlertTriangle } from "lucide-react"
+import { Wifi, WifiOff, Activity, AlertTriangle, Database } from "lucide-react"
 import { getGasLevel } from "../utils/formatters"
+import { gasApiService } from "../services/gasApi"
 
 export const NetworkStatus = ({ gasData, isOnline = true }) => {
   if (!gasData) {
@@ -14,7 +15,7 @@ export const NetworkStatus = ({ gasData, isOnline = true }) => {
       >
         <div className="animate-pulse flex items-center space-x-2">
           <div className="w-2 h-2 bg-gray-400 rounded-full"></div>
-          <span className="text-sm text-gray-500">Connecting...</span>
+          <span className="text-sm text-muted-dark">Connecting...</span>
         </div>
       </motion.div>
     )
@@ -22,18 +23,41 @@ export const NetworkStatus = ({ gasData, isOnline = true }) => {
 
   const currentGas = Number.parseFloat(gasData.ProposeGasPrice)
   const level = getGasLevel(currentGas)
+  const apiStatus = gasApiService.getApiStatus()
 
   const getStatusInfo = () => {
+    // Check API status first
+    if (apiStatus === "no-api-key") {
+      return {
+        icon: Database,
+        label: "Demo Mode",
+        color: "text-blue-600 dark:text-blue-400",
+        bgColor: "bg-blue-100 dark:bg-blue-900/20",
+        description: "Using mock data",
+      }
+    }
+
+    if (apiStatus === "mock-data") {
+      return {
+        icon: Database,
+        label: "Mock Data",
+        color: "text-orange-600 dark:text-orange-400",
+        bgColor: "bg-orange-100 dark:bg-orange-900/20",
+        description: "API unavailable",
+      }
+    }
+
     if (!isOnline) {
       return {
         icon: WifiOff,
         label: "Offline",
-        color: "text-gray-500",
+        color: "text-gray-500 dark:text-gray-400",
         bgColor: "bg-gray-100 dark:bg-gray-800",
         description: "No connection",
       }
     }
 
+    // Live data with gas level
     switch (level) {
       case "LOW":
         return {
@@ -63,7 +87,7 @@ export const NetworkStatus = ({ gasData, isOnline = true }) => {
         return {
           icon: Wifi,
           label: "Unknown",
-          color: "text-gray-500",
+          color: "text-gray-500 dark:text-gray-400",
           bgColor: "bg-gray-100 dark:bg-gray-800",
           description: "Status unknown",
         }
@@ -82,12 +106,12 @@ export const NetworkStatus = ({ gasData, isOnline = true }) => {
     >
       <motion.div
         animate={{
-          scale: isOnline ? [1, 1.2, 1] : 1,
-          rotate: isOnline ? [0, 5, -5, 0] : 0,
+          scale: isOnline && apiStatus === "live-data" ? [1, 1.2, 1] : 1,
+          rotate: isOnline && apiStatus === "live-data" ? [0, 5, -5, 0] : 0,
         }}
         transition={{
           duration: 2,
-          repeat: isOnline ? Number.POSITIVE_INFINITY : 0,
+          repeat: isOnline && apiStatus === "live-data" ? Number.POSITIVE_INFINITY : 0,
           repeatType: "reverse",
         }}
       >
@@ -96,7 +120,7 @@ export const NetworkStatus = ({ gasData, isOnline = true }) => {
 
       <div>
         <div className={`text-sm font-medium ${status.color}`}>{status.label}</div>
-        <div className="text-xs text-gray-500 dark:text-gray-400">{status.description}</div>
+        <div className="text-xs text-muted-dark">{status.description}</div>
       </div>
     </motion.div>
   )

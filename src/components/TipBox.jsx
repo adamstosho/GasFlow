@@ -50,8 +50,8 @@ export const TipBox = () => {
               <Lightbulb className="w-5 h-5 text-white" />
             </div>
             <div>
-              <h3 className="font-bold text-gray-800 dark:text-gray-200 text-lg">Gas Saving Tips</h3>
-              <p className="text-xs text-gray-500 dark:text-gray-400">Expert advice</p>
+              <h3 className="font-bold text-primary-dark text-lg">Gas Saving Tips</h3>
+              <p className="text-xs text-muted-dark">Expert advice</p>
             </div>
           </div>
 
@@ -63,7 +63,7 @@ export const TipBox = () => {
               whileTap={{ scale: 0.95 }}
               aria-label="Previous tip"
             >
-              <ChevronLeft className="w-4 h-4 text-gray-600 dark:text-gray-400" />
+              <ChevronLeft className="w-4 h-4 text-secondary-dark" />
             </motion.button>
             <motion.button
               onClick={nextTip}
@@ -72,7 +72,7 @@ export const TipBox = () => {
               whileTap={{ scale: 0.95 }}
               aria-label="Next tip"
             >
-              <ChevronRight className="w-4 h-4 text-gray-600 dark:text-gray-400" />
+              <ChevronRight className="w-4 h-4 text-secondary-dark" />
             </motion.button>
           </div>
         </div>
@@ -91,8 +91,8 @@ export const TipBox = () => {
                 <Sparkles className="w-4 h-4 text-yellow-600 dark:text-yellow-400" />
               </div>
               <div className="flex-1">
-                <h4 className="font-semibold text-gray-800 dark:text-gray-200 mb-3 text-lg">{currentTip.title}</h4>
-                <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">{currentTip.content}</p>
+                <h4 className="font-semibold text-primary-dark mb-3 text-lg">{currentTip.title}</h4>
+                <p className="text-sm text-secondary-dark leading-relaxed">{currentTip.content}</p>
               </div>
             </div>
           </motion.div>
@@ -119,7 +119,7 @@ export const TipBox = () => {
         </div>
 
         <div className="mt-4 text-center">
-          <p className="text-xs text-gray-500 dark:text-gray-400">
+          <p className="text-xs text-muted-dark">
             Tip {currentTipIndex + 1} of {GAS_TIPS.length}
           </p>
         </div>

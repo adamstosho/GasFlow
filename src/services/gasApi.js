@@ -4,14 +4,20 @@ class GasApiService {
     this.apiKey = import.meta.env.VITE_ETHERSCAN_API_KEY || "YourApiKeyToken"
     this.lastRequestTime = 0
     this.minRequestInterval = 5000 
+    this.isUsingMockData = false
   }
 
   async getCurrentGasPrices() {
     try {
-      // Check rate limiting
+      if (this.apiKey === "YourApiKeyToken") {
+        console.log("🔑 Using placeholder API key - switching to mock data")
+        this.isUsingMockData = true
+        return this.getMockGasData()
+      }
+
       const now = Date.now()
       if (now - this.lastRequestTime < this.minRequestInterval) {
-        console.log("Rate limit: Waiting before next request...")
+        console.log("⏱️ Rate limit: Waiting before next request...")
         await new Promise(resolve => setTimeout(resolve, this.minRequestInterval - (now - this.lastRequestTime)))
       }
       
@@ -27,14 +33,27 @@ class GasApiService {
 
       if (data.status === "1") {
         console.log("✅ Live gas data received:", data.result)
+        this.isUsingMockData = false
         return data.result
       } else {
-        console.warn("⚠️ API returned error:", data.message)
-        throw new Error(data.message || "Failed to fetch gas data")
+        // Handle specific API errors
+        if (data.message && data.message.includes("Invalid API Key")) {
+          console.warn("🔑 Invalid API key detected - using mock data")
+          this.isUsingMockData = true
+        } else if (data.message && data.message.includes("rate limit")) {
+          console.warn("⏱️ Rate limit reached - using mock data")
+          this.isUsingMockData = true
+        } else {
+          console.warn("⚠️ API returned error:", data.message)
+        }
+        
+        // Always fall back to mock data for any API error
+        return this.getMockGasData()
       }
     } catch (error) {
       console.error("Gas API Error:", error)
       console.log("🔄 Falling back to realistic mock data...")
+      this.isUsingMockData = true
       
       // Return realistic mock data for demo purposes
       return this.getMockGasData()
@@ -43,6 +62,12 @@ class GasApiService {
 
   async getEthPrice() {
     try {
+      // Check if we're using a placeholder API key
+      if (this.apiKey === "YourApiKeyToken") {
+        console.log("🔑 Using placeholder API key - switching to mock ETH price")
+        return this.getMockEthPrice()
+      }
+
       // Check rate limiting
       const now = Date.now()
       if (now - this.lastRequestTime < this.minRequestInterval) {
@@ -63,14 +88,22 @@ class GasApiService {
         console.log("✅ Live ETH price received:", data.result.ethusd)
         return Number.parseFloat(data.result.ethusd)
       } else {
-        console.warn("⚠️ ETH price API returned error:", data.message)
-        throw new Error(data.message || "Failed to fetch ETH price")
+        // Handle specific API errors
+        if (data.message && data.message.includes("Invalid API Key")) {
+          console.warn("🔑 Invalid API key detected - using mock ETH price")
+        } else if (data.message && data.message.includes("rate limit")) {
+          console.warn("⏱️ Rate limit reached - using mock ETH price")
+        } else {
+          console.warn("⚠️ ETH price API returned error:", data.message)
+        }
+        
+        // Fall back to mock price
+        return this.getMockEthPrice()
       }
     } catch (error) {
       console.error("ETH Price API Error:", error)
       console.log("🔄 Falling back to realistic mock ETH price...")
-      // Return realistic mock price for demo
-      return 2000 + Math.random() * 500 // Mock price between $2000-$2500
+      return this.getMockEthPrice()
     }
   }
 
@@ -86,6 +119,26 @@ class GasApiService {
     
     console.log("📊 Mock gas data generated:", mockData)
     return mockData
+  }
+
+  getMockEthPrice() {
+    // Return realistic mock ETH price
+    const mockPrice = 2000 + Math.random() * 500 // Mock price between $2000-$2500
+    console.log("💰 Mock ETH price generated:", mockPrice.toFixed(2))
+    return mockPrice
+  }
+
+  // Method to check if we're currently using mock data
+  isUsingMockDataNow() {
+    return this.isUsingMockData
+  }
+
+  // Method to get API status
+  getApiStatus() {
+    if (this.apiKey === "YourApiKeyToken") {
+      return "no-api-key"
+    }
+    return this.isUsingMockData ? "mock-data" : "live-data"
   }
 }
 

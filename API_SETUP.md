@@ -2,7 +2,7 @@
 
 ## Current Status ✅
 
-Your GasLite PWA is configured to use **Etherscan's official API**, which is the most reliable source for Ethereum gas data.
+Your GasFlow PWA is configured to use **Etherscan's official API**, which is the most reliable source for Ethereum gas data.
 
 ## How It Works
 

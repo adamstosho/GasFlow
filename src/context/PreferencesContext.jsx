@@ -1,6 +1,6 @@
 "use client"
 
-import { createContext, useContext } from "react"
+import { createContext, useContext, useState, useEffect } from "react"
 import { useLocalStorage } from "../hooks/useLocalStorage"
 
 const PreferencesContext = createContext()
@@ -14,29 +14,21 @@ export const usePreferences = () => {
 }
 
 export const PreferencesProvider = ({ children }) => {
-  const [theme, setTheme] = useLocalStorage("gaslite-theme", "light")
-  const [currency, setCurrency] = useLocalStorage("gaslite-currency", "USD")
-  const [gasThreshold, setGasThreshold] = useLocalStorage("gaslite-gas-threshold", 25)
-  const [notifications, setNotifications] = useLocalStorage("gaslite-notifications", true)
-  const [autoRefresh, setAutoRefresh] = useLocalStorage("gaslite-auto-refresh", true)
+  const [theme, setTheme] = useLocalStorage("gasflow-theme", "light")
+  const [currency, setCurrency] = useLocalStorage("gasflow-currency", "USD")
+  const [gasThreshold, setGasThreshold] = useLocalStorage("gasflow-gas-threshold", 25)
+  const [notifications, setNotifications] = useLocalStorage("gasflow-notifications", true)
+  const [autoRefresh, setAutoRefresh] = useLocalStorage("gasflow-auto-refresh", true)
+
+  // Apply theme to document
+  useEffect(() => {
+    const root = window.document.documentElement
+    root.classList.remove("light", "dark")
+    root.classList.add(theme)
+  }, [theme])
 
   const toggleTheme = () => {
-    const newTheme = theme === "light" ? "dark" : "light"
-    setTheme(newTheme)
-
-    // Update document class for Tailwind dark mode
-    if (newTheme === "dark") {
-      document.documentElement.classList.add("dark")
-    } else {
-      document.documentElement.classList.remove("dark")
-    }
-  }
-
-  // Initialize theme on mount
-  if (theme === "dark") {
-    document.documentElement.classList.add("dark")
-  } else {
-    document.documentElement.classList.remove("dark")
+    setTheme(theme === "light" ? "dark" : "light")
   }
 
   const value = {

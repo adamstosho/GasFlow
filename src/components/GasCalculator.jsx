@@ -51,7 +51,7 @@ export const GasCalculator = ({ gasData }) => {
   const shareResults = () => {
     if (navigator.share && costs) {
       navigator.share({
-        title: "Gas Fee Calculation - GasLite",
+        title: "Gas Fee Calculation - GasFlow",
         text: `Gas costs for ${TRANSACTION_TYPES[selectedType].label}: Slow: $${costs.slow.usd.toFixed(2)}, Standard: $${costs.standard.usd.toFixed(2)}, Fast: $${costs.fast.usd.toFixed(2)}`,
         url: window.location.href,
       })

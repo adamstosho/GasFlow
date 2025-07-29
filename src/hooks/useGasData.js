@@ -13,8 +13,8 @@ export const useGasData = () => {
   const [retryCount, setRetryCount] = useState(0)
 
   useEffect(() => {
-    const cachedData = localStorage.getItem("gaslite-last-data")
-    const cachedChart = localStorage.getItem("gaslite-chart-data")
+    const cachedData = localStorage.getItem("gasflow-last-data")
+    const cachedChart = localStorage.getItem("gasflow-chart-data")
 
     if (cachedData) {
       try {
@@ -47,7 +47,7 @@ export const useGasData = () => {
         setRetryCount(0)
 
         localStorage.setItem(
-          "gaslite-last-data",
+          "gasflow-last-data",
           JSON.stringify({
             gasData: data,
             timestamp: now.toISOString(),
@@ -71,7 +71,7 @@ export const useGasData = () => {
 
           const finalData = updatedData.length > CHART_DATA_POINTS ? updatedData.slice(-CHART_DATA_POINTS) : updatedData
 
-          localStorage.setItem("gaslite-chart-data", JSON.stringify(finalData))
+          localStorage.setItem("gasflow-chart-data", JSON.stringify(finalData))
 
           return finalData
         })

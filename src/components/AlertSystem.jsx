@@ -56,7 +56,7 @@ export const AlertSystem = ({ gasData }) => {
 
       // Browser notification
       if ("Notification" in window && Notification.permission === "granted") {
-        new Notification("GasLite - Gas Fee Alert", {
+        new Notification("GasFlow - Gas Fee Alert", {
           body: newAlert.message,
           icon: "/pwa-192x192.png",
           badge: "/pwa-192x192.png",

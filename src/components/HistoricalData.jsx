@@ -91,7 +91,7 @@ export const HistoricalData = () => {
     const encodedUri = encodeURI(csvContent)
     const link = document.createElement("a")
     link.setAttribute("href", encodedUri)
-    link.setAttribute("download", `gaslite-historical-${timeRange}.csv`)
+    link.setAttribute("download", `gasflow-historical-${timeRange}.csv`)
     document.body.appendChild(link)
     link.click()
     document.body.removeChild(link)

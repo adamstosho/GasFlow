@@ -102,8 +102,8 @@ export const GasCard = ({ gasData, type = "standard" }) => {
             {getTypeIcon()}
           </div>
           <div>
-            <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300">{getTypeLabel()}</h3>
-            <p className="text-xs text-gray-500 dark:text-gray-400">Priority</p>
+            <h3 className="text-sm font-semibold text-primary-dark">{getTypeLabel()}</h3>
+            <p className="text-xs text-muted-dark">Priority</p>
           </div>
         </div>
         <div className="flex items-center space-x-1">
@@ -115,7 +115,7 @@ export const GasCard = ({ gasData, type = "standard" }) => {
       <div className="mb-6 relative z-10">
         <div className="flex items-baseline space-x-2">
           <span className={`text-4xl font-bold ${levelColor}`}>{formatGwei(gasPrice)}</span>
-          <span className="text-sm font-medium text-gray-500 dark:text-gray-400">Gwei</span>
+          <span className="text-sm font-medium text-muted-dark">Gwei</span>
         </div>
         <div className={`mt-2 w-16 h-1 rounded-full ${levelColor.replace('text-', 'bg-')}`}></div>
       </div>
@@ -124,15 +124,15 @@ export const GasCard = ({ gasData, type = "standard" }) => {
       <div className="space-y-3 relative z-10">
         <div className="flex items-center justify-between p-3 bg-white/50 dark:bg-gray-700/50 rounded-xl">
           <div className="flex items-center space-x-2">
-            <DollarSign className="w-4 h-4 text-gray-500 dark:text-gray-400" />
-            <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Simple Transfer</span>
+            <DollarSign className="w-4 h-4 text-muted-dark" />
+            <span className="text-sm font-medium text-accent-dark">Simple Transfer</span>
           </div>
-          <span className="text-sm font-bold text-gray-800 dark:text-gray-200">${gasCostUSD.toFixed(2)}</span>
+          <span className="text-sm font-bold text-primary-dark">${gasCostUSD.toFixed(2)}</span>
         </div>
         
-        <div className="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
+        <div className="flex items-center justify-between text-xs text-muted-dark">
           <span>ETH Cost:</span>
-          <span className="font-mono">{gasCostEth.toFixed(6)} ETH</span>
+          <span className="font-mono text-accent-dark">{gasCostEth.toFixed(6)} ETH</span>
         </div>
       </div>
 

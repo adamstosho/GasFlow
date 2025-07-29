@@ -9,8 +9,8 @@ export default defineConfig({
       registerType: "autoUpdate",
       includeAssets: ["favicon.ico", "apple-touch-icon.png", "masked-icon.svg"],
       manifest: {
-        name: "GasLite - Ethereum Gas Fee Tracker",
-        short_name: "GasLite",
+        name: "GasFlow - Ethereum Gas Fee Tracker",
+        short_name: "GasFlow",
         description: "Real-time Ethereum gas fee visualizer and estimator for Web3 users",
         theme_color: "#3B82F6",
         background_color: "#F9FAFB",
