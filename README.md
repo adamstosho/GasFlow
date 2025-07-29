@@ -84,6 +84,20 @@ GasFlow solves these problems by providing:
 5. **Open your browser**
    Navigate to `http://localhost:5173` (or the port shown in terminal)
 
+# Preview of the App Interface (screenhots)
+
+![screenshot](/public/screenshots/screencapture-localhost-5174-2025-07-29-09_43_11_11zon.png)
+Landing Page
+![screenshot](/public/screenshots/screencapture-localhost-5174-2025-07-29-09_43_31_11zon.png)
+Dashboard of the app
+![screenshot](/public/screenshots/screencapture-localhost-5174-2025-07-29-09_43_53_11zon.png)
+Calculator page
+![screenshot](/public/screenshots/screencapture-localhost-5174-2025-07-29-09_44_04_11zon.png)
+History page
+![screenshot](/public/screenshots/screencapture-localhost-5174-2025-07-29-09_44_13_11zon.png)
+Settings page
+
+
 ### Getting an API Key (Optional)
 
 For live data, get a free API key from [Etherscan](https://etherscan.io/apis):

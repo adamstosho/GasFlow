@@ -434,7 +434,7 @@ export const Landing = ({ onEnterApp }) => {
           </motion.div>
           
           <p className="text-white/60 text-sm">
-            © 2024 GasFlow. Built for the Ethereum community with ❤️
+            © 2025 GasFlow. Built for the Ethereum community with ❤️ by ART_Redox
           </p>
         </div>
       </motion.footer>

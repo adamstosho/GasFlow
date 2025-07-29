@@ -7,7 +7,7 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: "autoUpdate",
-      includeAssets: ["favicon.ico", "apple-touch-icon.png", "masked-icon.svg"],
+      includeAssets: ["favicon.ico", "apple-touch-icon.png", "pwa-192x192.png", "pwa-512x512.png"],
       manifest: {
         name: "GasFlow - Ethereum Gas Fee Tracker",
         short_name: "GasFlow",
@@ -39,22 +39,11 @@ export default defineConfig({
       },
       workbox: {
         globPatterns: ["**/*.{js,css,html,ico,png,svg}"],
-        runtimeCaching: [
-          {
-            urlPattern: /^https:\/\/api\.etherscan\.io\/.*/i,
-            handler: "CacheFirst",
-            options: {
-              cacheName: "etherscan-api-cache",
-              expiration: {
-                maxEntries: 10,
-                maxAgeSeconds: 60 * 5, 
-              },
-              cacheKeyWillBeUsed: async ({ request }) => {
-                return `${request.url}?${Date.now()}`
-              },
-            },
-          },
-        ],
+        globIgnores: ["**/screenshots/**", "**/*.log", "**/node_modules/**"],
+        maximumFileSizeToCacheInBytes: 5 * 1024 * 1024, // 5MB limit
+      },
+      devOptions: {
+        enabled: true,
       },
     }),
   ],
