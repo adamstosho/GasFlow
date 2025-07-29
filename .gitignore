@@ -2,15 +2,7 @@
 node_modules
 dist
 
-# Screenshots and large files
-public/screenshots/
-*.png
-*.jpg
-*.jpeg
-*.gif
-*.mp4
-*.mov
-*.avi
+
 
 # Logs
 *.log
