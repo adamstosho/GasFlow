@@ -91,12 +91,10 @@ export const useGasData = () => {
     }
   }, [retryCount])
 
-  // Initial fetch
   useEffect(() => {
     fetchGasData()
   }, [fetchGasData])
 
-  // Auto-refresh
   useEffect(() => {
     const interval = setInterval(fetchGasData, REFRESH_INTERVAL)
     return () => clearInterval(interval)

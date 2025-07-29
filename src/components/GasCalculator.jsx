@@ -45,7 +45,6 @@ export const GasCalculator = ({ gasData }) => {
 
   const copyToClipboard = (text) => {
     navigator.clipboard.writeText(text)
-    // You could add a toast notification here
   }
 
   const shareResults = () => {

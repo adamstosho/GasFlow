@@ -8,7 +8,7 @@ export const ApiStatusBanner = () => {
   const apiStatus = gasApiService.getApiStatus()
 
   if (apiStatus === "live-data") {
-    return null // Don't show banner for live data
+    return null 
   }
 
   const getBannerInfo = () => {

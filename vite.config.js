@@ -47,7 +47,7 @@ export default defineConfig({
               cacheName: "etherscan-api-cache",
               expiration: {
                 maxEntries: 10,
-                maxAgeSeconds: 60 * 5, // 5 minutes
+                maxAgeSeconds: 60 * 5, 
               },
               cacheKeyWillBeUsed: async ({ request }) => {
                 return `${request.url}?${Date.now()}`

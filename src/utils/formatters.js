@@ -28,7 +28,7 @@ export const getGasLevel = (gasPrice) => {
 }
 
 export const calculateGasCost = (gasPrice, gasLimit, ethPrice) => {
-  const gasCostEth = (gasPrice * gasLimit) / 1e9 // Convert from Gwei to ETH
+  const gasCostEth = (gasPrice * gasLimit) / 1e9 
   const gasCostUSD = gasCostEth * ethPrice
   return {
     eth: gasCostEth,

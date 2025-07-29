@@ -36,7 +36,6 @@ class GasApiService {
         this.isUsingMockData = false
         return data.result
       } else {
-        // Handle specific API errors
         if (data.message && data.message.includes("Invalid API Key")) {
           console.warn("🔑 Invalid API key detected - using mock data")
           this.isUsingMockData = true
@@ -47,7 +46,6 @@ class GasApiService {
           console.warn("⚠️ API returned error:", data.message)
         }
         
-        // Always fall back to mock data for any API error
         return this.getMockGasData()
       }
     } catch (error) {
@@ -55,20 +53,17 @@ class GasApiService {
       console.log("🔄 Falling back to realistic mock data...")
       this.isUsingMockData = true
       
-      // Return realistic mock data for demo purposes
       return this.getMockGasData()
     }
   }
 
   async getEthPrice() {
     try {
-      // Check if we're using a placeholder API key
       if (this.apiKey === "YourApiKeyToken") {
         console.log("🔑 Using placeholder API key - switching to mock ETH price")
         return this.getMockEthPrice()
       }
 
-      // Check rate limiting
       const now = Date.now()
       if (now - this.lastRequestTime < this.minRequestInterval) {
         await new Promise(resolve => setTimeout(resolve, this.minRequestInterval - (now - this.lastRequestTime)))
@@ -88,7 +83,6 @@ class GasApiService {
         console.log("✅ Live ETH price received:", data.result.ethusd)
         return Number.parseFloat(data.result.ethusd)
       } else {
-        // Handle specific API errors
         if (data.message && data.message.includes("Invalid API Key")) {
           console.warn("🔑 Invalid API key detected - using mock ETH price")
         } else if (data.message && data.message.includes("rate limit")) {
@@ -97,7 +91,6 @@ class GasApiService {
           console.warn("⚠️ ETH price API returned error:", data.message)
         }
         
-        // Fall back to mock price
         return this.getMockEthPrice()
       }
     } catch (error) {
@@ -108,8 +101,7 @@ class GasApiService {
   }
 
   getMockGasData() {
-    // Generate realistic mock data based on current market conditions
-    const baseGas = 15 + Math.random() * 40 // 15-55 Gwei range (realistic for current market)
+    const baseGas = 15 + Math.random() * 40 
     
     const mockData = {
       SafeGasPrice: Math.max(1, baseGas - 5 - Math.random() * 5).toFixed(0),
@@ -122,18 +114,15 @@ class GasApiService {
   }
 
   getMockEthPrice() {
-    // Return realistic mock ETH price
-    const mockPrice = 2000 + Math.random() * 500 // Mock price between $2000-$2500
+    const mockPrice = 2000 + Math.random() * 500 
     console.log("💰 Mock ETH price generated:", mockPrice.toFixed(2))
     return mockPrice
   }
 
-  // Method to check if we're currently using mock data
   isUsingMockDataNow() {
     return this.isUsingMockData
   }
 
-  // Method to get API status
   getApiStatus() {
     if (this.apiKey === "YourApiKeyToken") {
       return "no-api-key"

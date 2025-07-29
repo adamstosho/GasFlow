@@ -23,7 +23,6 @@ export const Home = ({ onBackToLanding }) => {
   const [activeTab, setActiveTab] = useState("dashboard")
   const [isOnline, setIsOnline] = useState(navigator.onLine)
 
-  // Monitor online status
   useEffect(() => {
     const handleOnline = () => setIsOnline(true)
     const handleOffline = () => setIsOnline(false)

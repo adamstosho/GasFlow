@@ -26,7 +26,6 @@ export const NetworkStatus = ({ gasData, isOnline = true }) => {
   const apiStatus = gasApiService.getApiStatus()
 
   const getStatusInfo = () => {
-    // Check API status first
     if (apiStatus === "no-api-key") {
       return {
         icon: Database,
@@ -57,7 +56,6 @@ export const NetworkStatus = ({ gasData, isOnline = true }) => {
       }
     }
 
-    // Live data with gas level
     switch (level) {
       case "LOW":
         return {

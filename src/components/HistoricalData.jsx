@@ -14,29 +14,26 @@ export const HistoricalData = () => {
   const [stats, setStats] = useState(null)
   const { theme } = usePreferences()
 
-  // Generate mock historical data for demo
   useEffect(() => {
     const generateHistoricalData = () => {
       const data = []
       const now = Date.now()
-      const points = timeRange === "24h" ? 24 : timeRange === "7d" ? 168 : 720 // hours
-      const interval = timeRange === "24h" ? 3600000 : 3600000 // 1 hour intervals
+      const points = timeRange === "24h" ? 24 : timeRange === "7d" ? 168 : 720 
+      const interval = timeRange === "24h" ? 3600000 : 3600000 
 
       let baseGas = 25
 
       for (let i = points; i >= 0; i--) {
         const timestamp = now - i * interval
 
-        // Simulate realistic gas price fluctuations
         const volatility = Math.random() * 10 - 5
         const timeOfDay = new Date(timestamp).getHours()
         const dayOfWeek = new Date(timestamp).getDay()
 
-        // Lower fees on weekends and late night
         let multiplier = 1
         if (dayOfWeek === 0 || dayOfWeek === 6) multiplier *= 0.7
         if (timeOfDay >= 2 && timeOfDay <= 6) multiplier *= 0.6
-        if (timeOfDay >= 14 && timeOfDay <= 18) multiplier *= 1.4 // Peak hours
+        if (timeOfDay >= 14 && timeOfDay <= 18) multiplier *= 1.4 
 
         baseGas = Math.max(5, baseGas + volatility)
         const gasPrice = baseGas * multiplier
@@ -59,7 +56,6 @@ export const HistoricalData = () => {
       const data = generateHistoricalData()
       setHistoricalData(data)
 
-      // Calculate stats
       const prices = data.map((d) => d.gasPrice)
       const currentPrice = prices[prices.length - 1]
       const previousPrice = prices[prices.length - 2]

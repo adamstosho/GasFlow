@@ -14,7 +14,6 @@ export const AlertSystem = ({ gasData }) => {
 
   const playNotificationSound = () => {
     if (soundEnabled) {
-      // Create a simple beep sound using Web Audio API
       const audioContext = new (window.AudioContext || window.webkitAudioContext)()
       const oscillator = audioContext.createOscillator()
       const gainNode = audioContext.createGain()
@@ -39,7 +38,6 @@ export const AlertSystem = ({ gasData }) => {
     const currentGas = Number.parseFloat(gasData.ProposeGasPrice)
     const now = Date.now()
 
-    // Prevent spam alerts (minimum 5 minutes between alerts)
     if (currentGas <= gasThreshold && now - lastAlertTime > 300000) {
       const newAlert = {
         id: now,
@@ -50,11 +48,10 @@ export const AlertSystem = ({ gasData }) => {
         gasPrice: currentGas,
       }
 
-      setAlerts((prev) => [newAlert, ...prev.slice(0, 4)]) // Keep only 5 most recent
+      setAlerts((prev) => [newAlert, ...prev.slice(0, 4)]) 
       setLastAlertTime(now)
       playNotificationSound()
 
-      // Browser notification
       if ("Notification" in window && Notification.permission === "granted") {
         new Notification("GasFlow - Gas Fee Alert", {
           body: newAlert.message,

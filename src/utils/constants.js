@@ -77,7 +77,7 @@ export const NETWORK_STATUS = {
   CRITICAL: { label: "Critical", color: "red", threshold: Number.POSITIVE_INFINITY },
 }
 
-export const REFRESH_INTERVAL = 15000 // 15 seconds
-export const CHART_DATA_POINTS = 30 // Number of data points to show in chart
+export const REFRESH_INTERVAL = 15000 
+export const CHART_DATA_POINTS = 30 
 export const ALERT_SOUND_URL = "/notification.mp3"
 export const MAX_HISTORY_DAYS = 7

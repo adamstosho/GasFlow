@@ -9,7 +9,6 @@ export const TipBox = () => {
   const [currentTipIndex, setCurrentTipIndex] = useState(0)
   const [isAutoRotating, setIsAutoRotating] = useState(true)
 
-  // Auto-rotate tips every 10 seconds
   useEffect(() => {
     if (!isAutoRotating) return
 

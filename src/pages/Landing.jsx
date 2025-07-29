@@ -29,7 +29,6 @@ export const Landing = ({ onEnterApp }) => {
   useEffect(() => {
     setIsVisible(true)
     
-    // Auto-rotate features
     const interval = setInterval(() => {
       setCurrentFeature((prev) => (prev + 1) % features.length)
     }, 3000)

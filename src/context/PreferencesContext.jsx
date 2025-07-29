@@ -20,7 +20,6 @@ export const PreferencesProvider = ({ children }) => {
   const [notifications, setNotifications] = useLocalStorage("gasflow-notifications", true)
   const [autoRefresh, setAutoRefresh] = useLocalStorage("gasflow-auto-refresh", true)
 
-  // Apply theme to document
   useEffect(() => {
     const root = window.document.documentElement
     root.classList.remove("light", "dark")

@@ -74,7 +74,6 @@ export const GasCard = ({ gasData, type = "standard" }) => {
   const levelColor = getGasLevelColor(level)
   const levelBg = getGasLevelBg(level)
 
-  // Calculate estimated cost for simple transfer
   const gasCostEth = (gasPrice * TRANSACTION_TYPES.SIMPLE_TRANSFER.gasLimit) / 1e9
   const gasCostUSD = gasCostEth * ethPrice
 
